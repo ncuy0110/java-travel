@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{public/index}">
+<head>
+    <meta charset="UTF-8">
+    <title>Tour Details</title>
+    <link rel="stylesheet" href="/public/css/tour/tour_details.css">
+</head>
+<body>
+<div layout:fragment="sidebar" class="col-0">
+</div>
+<div layout:fragment="content">
+    <!--    Start Card-->
+    <div class="row">
+        <div class="card col-12">
+            <img th:src="@{/uploads/} + ${tour.image}" class="card-img-top" alt="">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${tour.title}"></h5>
+                <div class="row mb-2">
+                    <div class="col-5">
+                        <b class="card-text">Departure Day: </b>
+                        <p class="card-text" th:text="${#dates.format(tour.departureDay, 'dd/MM/yyyy')}"></p>
+                    </div>
+                    <div class="col-5">
+                        <b class="card-text">Departure Point: </b>
+                        <p class="card-text" th:text="${tour.departurePoint}"></p>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-5">
+                        <b class="card-text">Adult Price: </b>
+                        <p class="card-text" th:text="${tour.adultPrice} + 'VND'"></p>
+                    </div>
+                    <div class="col-5">
+                        <b class="card-text">Children Price: </b>
+                        <p class="card-text" th:text="${tour.childrenPrice} + 'VND'"></p>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-5">
+                        <b class="card-text">Total: </b>
+                        <p class="card-text" th:text="${tour.total}"></p>
+                    </div>
+                    <div class="col-5">
+                        <b class="card-text">Sold: </b>
+                        <p class="card-text" th:text="${tour.sold}"></p>
+                    </div>
+                </div>
+                <div class="row ml-2">
+                    <form th:action="@{/book-tour/} + ${tour.id}" method="post" th:object="${booking}">
+                        <div class="form-group">
+                            <div class="row form-group">
+                                <div class="col-6 form-group">
+                                    <label for="adultQuantity"><b>Adult quantity</b></label>
+                                    <input
+                                            type="text"
+                                            id="adultQuantity"
+                                            required
+                                            autofocus="autofocus"
+                                            th:field="*{adultQuantity}"
+                                            value="1"
+                                    />
+                                </div>
+                                <div class="col-6 form-group">
+                                    <label for="childrenQuantity"><b>Children quantity</b></label>
+                                    <input
+                                            type="text"
+                                            th:field="*{childrenQuantity}"
+                                            value="1"
+                                            id="childrenQuantity"
+                                            required
+                                            autofocus="autofocus"
+                                    />
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-lg mb-1">Book</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    End Card-->
+
+    <div class="row">
+        <div class="col-12 justify-content-center">
+            <h3 class="mt-5">Description</h3>
+            <p th:utext="${tour.description}"> </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{public/index}">
+<head>
+    <meta charset="UTF-8">
+    <title>Booked</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container-fluid">
+        <div th:each="booked : ${booked_list}" class="col-6 mx-auto">
+            <div class="row bg-light border-bottom border-bottom-dark pt-3">
+                <div class="col-3">
+                    <img th:src="@{http://localhost:8080/uploads/} + ${booked.tour.image}" class="w-100">
+                </div>
+                <div class="col-9">
+                    <p> <b th:text="${booked.tour.title}"></b> </p>
+                    <p th:text="'Adult: x' + ${booked.adultQuantity} + ' = ' + ${booked.adultQuantity*booked.adultPrice}"></p>
+                    <p th:text="'Children: x' + ${booked.childrenQuantity} + ' = ' + ${booked.childrenQuantity*booked.childrenPrice}"></p>
+                    <p th:text="'Total: ' + ${booked.totalCost} + ' VND'"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

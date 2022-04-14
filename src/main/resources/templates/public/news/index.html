@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{public/index}">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel - News</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-11 mx-auto">
+            <!--                Start show tour-->
+            <div th:if="${#lists.size(news_list) < 1}">
+                <h1>No result</h1>
+            </div>
+            <div class="row d-flex flex-wrap justify-content-center">
+                <div th:each="news : ${news_list}" class="card card-custom mr-5 mb-5" style="width: 350px">
+                    <img alt="Card image cap" style="width: 100%;" class="card-img-top card-image"
+                         th:src="@{http://localhost:8080/uploads/} + ${news.image}">
+                    <div class="container-fluid">
+                        <div class="row card-body" style="height: 15rem">
+                            <h5 class="card-title" th:text="${news.title}"></h5>
+                        </div>
+                        <div class="row justify-content-around text-center mb-2">
+                            <a th:href="@{news/details/} + ${news.id}"
+                               class="btn btn-primary justify-content-center" style="width: 40%">Details</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--                End show tours-->
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

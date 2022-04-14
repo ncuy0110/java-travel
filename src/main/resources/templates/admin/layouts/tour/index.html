@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/index.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Tour</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">All tour</h1>
+
+    <a th:href="@{/admin/tour/new}" class="btn btn-info mt-4 mb-4" role="button">New Tour</a>
+
+    <!--    message new success-->
+    <div th:if="${param.new_tour_success}" class="row-cols-3">
+        <p class="alert alert-success">Add success</p>
+    </div>
+    <div th:if="${param.new_tour_error}" class="row-cols-3">
+        <p class="alert alert-danger">Add error</p>
+    </div>
+
+    <!--    message delete success-->
+    <div th:if="${param.delete_success}" class="row-cols-3">
+        <p class="alert alert-success">Delete success</p>
+    </div>
+
+    <!--    message delete failed-->
+    <div th:if="${param.delete_failed}" class="row-cols-3">
+        <p class="alert alert-danger">Delete failed</p>
+    </div>
+    <!--    message edit success-->
+    <div th:if="${param.edit_success}" class="row-cols-3">
+        <p class="alert alert-success">Edit success</p>
+    </div>
+
+    <!--    message edit failed-->
+    <div th:if="${param.edit_failed}" class="row-cols-3">
+        <p class="alert alert-danger">Edit failed</p>
+    </div>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Tours</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Departure Day</th>
+                        <th>Departure Point</th>
+                        <th>Adult Price</th>
+                        <th>Children Price</th>
+                        <th>Total</th>
+                        <th>Sold</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Departure Day</th>
+                        <th>Departure Point</th>
+                        <th>Adult Price</th>
+                        <th>Children Price</th>
+                        <th>Total</th>
+                        <th>Sold</th>
+                        <th>Action</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    <tr th:each="tour : ${tours}">
+                        <td th:text="${tour.id}"></td>
+                        <td th:text="${tour.title}"></td>
+                        <td th:text="${#dates.format(tour.departureDay, 'dd/MM/yyyy')}"></td>
+                        <td th:text="${tour.departurePoint}"></td>
+                        <td th:text="${tour.adultPrice}"></td>
+                        <td th:text="${tour.childrenPrice}"></td>
+                        <td th:text="${tour.Total}"></td>
+                        <td th:text="${tour.sold}"></td>
+                        <td>
+                            <a th:href="@{'/admin/tour/edit/' + ${tour.id}}"
+                               class="btn btn-warning"
+                            >Edit</a>
+                            <a th:href="@{'/admin/tour/delete/' + ${tour.id}}"
+                            class="btn btn-danger"
+                            >Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

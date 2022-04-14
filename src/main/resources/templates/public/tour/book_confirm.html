@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{public/index}">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="container-fluid">
+            <div class="col-6 mx-auto">
+                <div>
+                    <div th:if="${param.book_failed}" class="alert alert-danger">Booking failed!(Quantity is zero or over maximum)</div>
+                    <h3 th:text="${tour.title}"></h3>
+                    <p th:text="'Adult quantity: x' + ${adult_quantity} + ' = ' + ${tour.adultPrice*adult_quantity} + ' VND'"></p>
+                    <p th:text="'Children quantity: x' + ${children_quantity} + ' = ' + ${tour.childrenPrice*children_quantity} + ' VND'"></p>
+                    <p th:text="'Total: ' + ${children_quantity*tour.childrenPrice + adult_quantity*tour.adultPrice} + ' VND'"></p>
+                    <a th:href="@{/book-confirm-end} + '?id='+${tour.id} + '&adult=' + ${adult_quantity} + '&children=' + ${children_quantity}" class="btn btn-primary">Confirm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
