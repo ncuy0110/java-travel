@@ -2,6 +2,7 @@ package com.hutech.travelmanagement.service.implement;
 
 import com.hutech.travelmanagement.model.Tour;
 import com.hutech.travelmanagement.repository.TourRepository;
+import com.hutech.travelmanagement.service.FileUploadUtil;
 import com.hutech.travelmanagement.service.interfaces.StorageService;
 import com.hutech.travelmanagement.service.interfaces.TourService;
 import com.hutech.travelmanagement.web.dto.TourDto;
